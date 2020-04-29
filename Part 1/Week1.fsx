@@ -36,15 +36,11 @@ let balance (chars: list<char>) : bool =
         match (list, count) with
         | ([], 0) -> true
         | ([], _) -> false
-        | (h::t, 0) ->
-            match h with
-            | '(' -> check 1 t
-            | ')' -> false
-            | _   -> check 0 t
         | (h::t, c) ->
-            match h with
-            | '(' -> false
-            | ')' -> check 0 t
+            match (h,c) with
+            | (')',0) -> false
+            | (')',_) -> check (c-1) t
+            | ('(',_) -> check (c+1) t
             | _   -> check c t
     check 0 chars
 
@@ -76,5 +72,5 @@ let countChange (money: int) (coins: list<int>) : int =
             | h::t -> (count counter (r - h) remCoins) + (count counter r t) 
     count 0 money coins
 
-let listCoints = [1;2;3]
-countChange 5 listCoints
+let listCoints = [5;10;20;50;100;200;500]
+countChange 300 listCoints
