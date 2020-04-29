@@ -30,7 +30,7 @@ pascal 5 7
 // Not OK -> ":-)"
 // Not OK -> "())("
 
-let checkParenthesesBalancing (chars: list<char>) : bool =
+let balance (chars: list<char>) : bool =
     
     let rec check (count: int) (list: list<char>) =
         match (list, count) with
@@ -51,7 +51,7 @@ let checkParenthesesBalancing (chars: list<char>) : bool =
 let testEx2 (str: string) =
     str
     |> Seq.toList
-    |> checkParenthesesBalancing
+    |> balance
 
 ["Hello" ; "" ; "Hi (test)" ; "Test (" ; "()" ; "())("]
 |> List.map testEx2
